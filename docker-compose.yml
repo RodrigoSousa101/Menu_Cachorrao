@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16
+    container_name: pg_menu
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: menu_cachorrao
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: go_api
+    environment:
+      DB_DRIVER: postgres
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/menu_cachorrao?sslmode=disable
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      
+volumes:
+  pg_data:
