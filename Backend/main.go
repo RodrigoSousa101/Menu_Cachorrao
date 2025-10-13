@@ -21,6 +21,8 @@ func main() {
 
 	r := gin.Default()
 
+	r.Static("/uploads", "./uploads")
+
 	r.Use(func(c *gin.Context) {
 		c.Set("db", database)
 		c.Next()
