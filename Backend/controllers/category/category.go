@@ -10,8 +10,7 @@ func CategoryRoutes(rg *gin.RouterGroup) {
 		router.POST("", CreateCategory)
 		router.GET("/:id", GetCategory)
 		router.GET("", GetAllCategories)
-		//router.PUT("/:id", UpdateUser)
-		//router.DELETE("/:id", DeleteUser)
-		//router.GET("/current", GetCurrentUser)
+		router.PUT("/:id", UpdateCategory)
+		router.DELETE("/:id", DeleteCategory)
 	}
 }

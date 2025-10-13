@@ -18,8 +18,15 @@ func UpdateCategory(c *gin.Context) {
 		return
 	}
 
-	if err := c.ShouldBindJson(&Category); err != nil {
+	if err := c.ShouldBindJSON(&Category); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	if err := db.Save(&Category).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update category"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Category updated successfully", "Category": Category})
 }

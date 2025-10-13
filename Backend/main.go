@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/RodrigoSousa101/Menu_Cachorrao/backend/controllers/category"
+	"github.com/RodrigoSousa101/Menu_Cachorrao/backend/controllers/menu_item"
 	"github.com/RodrigoSousa101/Menu_Cachorrao/backend/db"
 	"github.com/RodrigoSousa101/Menu_Cachorrao/backend/models"
 	"github.com/gin-gonic/gin"
@@ -39,6 +40,7 @@ func main() {
 
 	api := r.Group("/api")
 	category.CategoryRoutes(api)
+	menu_item.MenuItemRoutes(api)
 
 	log.Println("API on http://localhost:3000")
 	if err := r.Run(":3000"); err != nil {
