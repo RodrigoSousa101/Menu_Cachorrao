@@ -3,7 +3,7 @@ type Props = {
   name: string;
   price: number;
   ingredients: string | string[];
-  image: string;
+  image: string | null;
 };
 
 function MenuItem({ id, name, price, ingredients, image }: Props) {
@@ -13,7 +13,23 @@ function MenuItem({ id, name, price, ingredients, image }: Props) {
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
-      <div className="aspect-[16/9] bg-black" />
+      <div className="aspect-[16/9] bg-gray-100 overflow-hidden">
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              // se a imagem falhar, esconde-a para não ficar quebrada
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+            Sem imagem
+          </div>
+        )}
+      </div>
 
       <div className="p-6">
         <div className="flex items-center justify-between">
