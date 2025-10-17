@@ -195,15 +195,17 @@ function AddMenuItem() {
 
   return (
     <div className="min-h-screen bg-amber-50 ">
-      <AdminNavbar />
+      <AdminNavbar 
+        showBack={true}
+      />
       <div className="md:px-10 md:py-10 px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-4xl font-bold">Menu Itens</p>
             <p>Gerir os Itens do menu</p>
           </div>
           <button
-            className="h-10 px-4 rounded-xl bg-amber-600 hover:bg-amber-500 cursor-pointer font-semibold flex items-center gap-2 text-white"
+            className="h-10  px-4 rounded-xl bg-amber-600 hover:bg-amber-500 cursor-pointer font-semibold flex items-center gap-2 text-white"
             type="button"
             onClick={openCreateModal}
           >

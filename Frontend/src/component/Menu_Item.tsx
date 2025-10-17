@@ -12,7 +12,7 @@ function MenuItem({ id, name, price, ingredients, image }: Props) {
     : ingredients.split(",").map(i => i.trim()).filter(Boolean);
 
   return (
-    <div className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div className="w-full bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
       <div className="aspect-[16/9] bg-gray-100 overflow-hidden">
         {image ? (
           <img

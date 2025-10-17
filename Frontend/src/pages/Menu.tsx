@@ -69,7 +69,7 @@ function Menu() {
             </button>
           ))}
         </div>
-        <div className="w-full flex items-center justify-center mt-4">
+        <div className="w-full flex justify-center mt-4">
         {selectedCategory ? (
           selectedCategory.Items?.length ? (
             <div className="w-full max-w-5xl px-4 md:px-6 lg:px-8">
