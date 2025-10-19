@@ -9,7 +9,7 @@ type MenuItem = {
   ID: number;
   Name: string;
   Price: number;
-  Ingredients: string[];
+  ingredients: string[];
   ImageURL?: string | null;
   CategoryID: number;
   Category?: { ID: number; Name: string };
@@ -55,6 +55,7 @@ function AddMenuItem() {
 
       const itemsRes = await axios.get<MenuItem[]>("http://localhost:3000/api/menuitem");
       const its = Array.isArray(itemsRes.data) ? itemsRes.data : (itemsRes.data as any)?.data ?? [];
+      console.log(its);
       setItems(its);
     } catch (err) {
       console.error("Erro a carregar dados:", err);
@@ -86,7 +87,7 @@ function AddMenuItem() {
     setEditingItem(item);
     setName(item.Name);
     setPrice(String(item.Price));
-    setIngredientsText((item.Ingredients || []).join(", "));
+    setIngredientsText((item.ingredients || []).join(", "));
     setImageURL(item.ImageURL || "");
     setCategoryId(item.CategoryID);
     setOpen(true);
