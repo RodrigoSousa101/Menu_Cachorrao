@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AdminNavbar from "../component/Admin_navbar";
 import axios from "axios";
+import api from "../lib/api";
 
 type Category = {
   ID: number;
@@ -26,7 +27,7 @@ function AddCategory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get<Category[]>("http://localhost:3000/api/category");
+        const { data } = await api.get<Category[]>("/api/category");
         setCategories(data || []);
       } catch (error) {
         console.error("Erro ao buscar categorias:", error);
@@ -58,12 +59,12 @@ function AddCategory() {
     try {
       if (editingCategory) {
         // EDITAR
-        await axios.put(`http://localhost:3000/api/category/${editingCategory.ID}`, {
+        await api.put(`/api/category/${editingCategory.ID}`, {
           Name: name,
         });
       } else {
         // CRIAR
-        await axios.post("http://localhost:3000/api/category", { Name: name });
+        await api.post("/api/category", { Name: name });
       }
 
       setName("");
@@ -83,7 +84,7 @@ function AddCategory() {
     if (!categoryToDelete) return;
     setDeleting(true);
     try {
-      await axios.delete(`http://localhost:3000/api/category/${categoryToDelete.ID}`);
+      await api.delete(`/api/category/${categoryToDelete.ID}`);
       setDeleteOpen(false);
       setCategoryToDelete(null);
       window.location.reload();

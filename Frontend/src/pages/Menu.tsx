@@ -2,6 +2,7 @@ import logo from "../assets/cachorraologo.png";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import MenuItem from "../component/Menu_Item"
+import api from "../lib/api";
 
 type Item = {
   ID: number;
@@ -25,7 +26,7 @@ function Menu() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get<Category[]>("http://localhost:3000/api/category");
+        const { data } = await api.get<Category[]>("/api/category");
         setCategories(data || []);
       
         if (data?.length) setActiveCategory(data[0].ID);

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import AdminNavbar from "../component/Admin_navbar";
 import axios from "axios";
+import api from "../lib/api";
 
 /** ===== Tipos ===== */
 type Category = { ID: number; Name: string; };
@@ -50,10 +51,10 @@ function AddMenuItem() {
   async function fetchData() {
     setLoading(true);
     try {
-      const catRes = await axios.get<Category[]>("http://localhost:3000/api/category");
+      const catRes = await api.get<Category[]>("/api/category");
       setCategories(Array.isArray(catRes.data) ? catRes.data : []);
 
-      const itemsRes = await axios.get<MenuItem[]>("http://localhost:3000/api/menuitem");
+      const itemsRes = await api.get<MenuItem[]>("/api/menuitem");
       const its = Array.isArray(itemsRes.data) ? itemsRes.data : (itemsRes.data as any)?.data ?? [];
       console.log(its);
       setItems(its);
@@ -143,7 +144,7 @@ function AddMenuItem() {
     try {
       if (editingItem) {
         // PUT /api/menuitem/:id  (podes alterar categoria também)
-        await axios.put(`http://localhost:3000/api/menuitem/${editingItem.ID}`, {
+        await api.put(`/api/menuitem/${editingItem.ID}`, {
           Name: name.trim(),
           Price: parsedPrice,
           Ingredients: ingredientsArr,
@@ -152,7 +153,7 @@ function AddMenuItem() {
         });
       } else {
         // POST /api/menuitem/:category_id  (category_id no path)
-        await axios.post(`http://localhost:3000/api/menuitem/${categoryId}`, {
+        await api.post(`/api/menuitem/${categoryId}`, {
           Name: name.trim(),
           Price: parsedPrice,
           Ingredients: ingredientsArr,
@@ -181,7 +182,7 @@ function AddMenuItem() {
     if (!itemToDelete) return;
     setDeleting(true);
     try {
-      await axios.delete(`http://localhost:3000/api/menuitem/${itemToDelete.ID}`);
+      await api.delete(`/api/menuitem/${itemToDelete.ID}`);
       setDeleteOpen(false);
       setItemToDelete(null);
       // para já, recarrega

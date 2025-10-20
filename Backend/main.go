@@ -44,8 +44,9 @@ func main() {
 	category.CategoryRoutes(api)
 	menu_item.MenuItemRoutes(api)
 
-	log.Println("API on http://localhost:3000")
-	if err := r.Run(":3000"); err != nil {
+	addr := "0.0.0.0:3000"
+
+	if err := r.Run(addr); err != nil {
 		log.Fatal(err)
 	}
 }
